@@ -33,8 +33,7 @@ public class RedisPubSubConfig {
     @Bean("redisListener")
     public RedisListener redisListener() {
         RedisListener redisListener = new RedisListener(redisMessageListenerContainer());
-        redisListener.setListenerContainer(redisMessageListenerContainer());
-        redisListener.setKeyspaceNotificationsConfigParameter("Ex");
+        redisListener.setKeyspaceNotificationsConfigParameter("Kx");
         redisListener.setPatternTopic("__keyspace@*__:REG*");
         return redisListener;
     }

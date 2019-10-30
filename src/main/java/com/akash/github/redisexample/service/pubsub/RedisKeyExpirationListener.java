@@ -5,8 +5,15 @@ import org.springframework.data.redis.listener.KeyExpirationEventMessageListener
 import org.springframework.data.redis.listener.RedisMessageListenerContainer;
 
 
+/**
+ * This listener is used to listen to all expired keys and then filters keys using prefix
+ *
+ */
 public class RedisKeyExpirationListener extends KeyExpirationEventMessageListener {
 
+    /**
+     * This is the prefix of the key to filter out
+     */
     private String keyPrefix;
 
     public RedisKeyExpirationListener(RedisMessageListenerContainer listenerContainer, String keyPrefix) {
@@ -23,48 +30,3 @@ public class RedisKeyExpirationListener extends KeyExpirationEventMessageListene
 
     }
 }
-
-/*    @Override
-    public void init() {
-        if (StringUtils.hasText(this.keyspaceNotificationsConfigParameter)) {
-            RedisConnection connection = this.listenerContainer.getConnectionFactory().getConnection();
-            try {
-                Properties config = connection.getConfig("notify-keyspace-events");
-                if (!StringUtils.hasText(config.getProperty("notify-keyspace-events"))) {
-                    connection.setConfig("notify-keyspace-events", this.keyspaceNotificationsConfigParameter);
-                }
-            } finally {
-                connection.close();
-            }
-        }
-
-        doRegister(this.listenerContainer);
-    }
-
-    protected void doRegister(RedisMessageListenerContainer container) {
-        this.listenerContainer.addMessageListener(this, TOPIC_ALL_KEYEVENTS);
-    }*/
-//extends KeyspaceEventMessageListener {
-
-    /*public RedisKeyExpirationListener(RedisMessageListenerContainer listenerContainer) {
-        super(listenerContainer);
-    }
-
-    @Override
-    public void setKeyspaceNotificationsConfigParameter(String keyspaceNotificationsConfigParameter) {
-        super.setKeyspaceNotificationsConfigParameter(keyspaceNotificationsConfigParameter);
-    }
-
-    @Override
-    protected void doHandleMessage(Message message) {
-        String expiredKey = new String(message.getBody());
-        System.out.println("Expired key : " + expiredKey);
-    }*/
-//implements MessageListener {
-
-/*    @Override
-    public void onMessage(Message message, byte[] bytes) {
-        String expiredKey = new String(message.getBody());
-        System.out.println("Expired key : " + expiredKey);
-    }*/
-//}
