@@ -1,0 +1,12 @@
+---
+redis:
+  hostName: 127.0.0.1
+  port: 6379
+redisPool:
+  timeout: 10000
+  maxIdle: 50
+  minIdle: 10
+  maxWaitMillis: 5000
+  maxActive: 50
+  minEvictableIdleTime: 5000
+  timeBetweenEvictionRuns: 5000
